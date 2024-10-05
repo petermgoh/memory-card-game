@@ -16,10 +16,10 @@ function App() {
     let shuffledCards = [...cards];
     let currentIndex = shuffledCards.length;
     
-    if (currentIndex === 0) {
-      console.error('Cannot shuffle an empty cards array');
-      return;
-    }
+    // if (currentIndex === 0) {
+    //   console.error('Cannot shuffle an empty cards array');
+    //   return;
+    // }
   
     while (currentIndex !== 0) {
       let randomIndex = Math.floor(Math.random() * currentIndex);
