@@ -12,7 +12,7 @@ function App() {
   const [currScore, setCurrScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([])
 
-  const randomizeCards = () => {
+  const randomizeCards = (cards) => {
     let shuffledCards = [...cards];
     let currentIndex = shuffledCards.length;
     
@@ -31,8 +31,8 @@ function App() {
         [shuffledCards[randomIndex], shuffledCards[currentIndex]];
       
     }
-  
-    setCards(shuffledCards);
+    return shuffledCards
+    // setCards(shuffledCards);
     // console.log('Shuffled Cards:', shuffledCards);
   };
   
@@ -66,7 +66,6 @@ function App() {
       }
     }
     fetchCards()
-    randomizeCards()
   }, [])
 
   if (loading) {
@@ -87,10 +86,10 @@ function App() {
       setClickedCards((clickedCards) => [...clickedCards, card])
       setCurrScore(currScore + 1)
     }
-    randomizeCards()
+    // randomizeCards()
   }
 
-  
+  const shuffledCards = randomizeCards(cards)
   return (
     <div>
       <Header 
@@ -98,7 +97,7 @@ function App() {
         maxScore={maxScore}
       />
       <div className='grid'>
-        {cards.map((card) => (
+        {shuffledCards.map((card) => (
           <Card card={card} handleClick={handleClick} key={card.id}/>
         ))}
       </div>
