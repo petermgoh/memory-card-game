@@ -12,38 +12,16 @@ function App() {
   const [currScore, setCurrScore] = useState(0)
   const [clickedCards, setClickedCards] = useState([])
 
-  // useEffect(() => {
-  //   const fetchCards = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         'https://marvel-snap-api.p.rapidapi.com/api/get-card-variants/Magik',
-  //         {
-  //           method: 'GET',
-  //           headers: {
-  //             'x-rapidapi-host': 'marvel-snap-api.p.rapidapi.com',
-  //             'x-rapidapi-key': '37da9cec52msh64440760aa8b1eep1239abjsn286419c7c0ab', // Replace this with your RapidAPI key
-  //           },
-  //         }
-  //       );
+  const randomizeCards = () => {
+    let currentIndex = cards.length
+    while (currentIndex != 0) {
+      let randomIndex = Math.floor(Math.random() * currentIndex)
+      currentIndex--
 
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       const data = await response.json();
-  //       while (data.length > 12) {
-  //         data.pop()
-  //       }
-  //       setCards(data);
-  //       setLoading(false);
-        
-  //     } catch (err) {
-  //       setError('Error fetching card data');
-  //       setLoading(false);
-  //     }
-  //   };
+      [cards[currentIndex], cards[randomIndex]] = [cards[randomIndex], cards[currentIndex]]
+    }
+  }
 
-  //   fetchCards();
-  // }, []);
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -75,6 +53,7 @@ function App() {
       }
     }
     fetchCards()
+    randomizeCards()
   }, [])
 
   if (loading) {
@@ -85,28 +64,20 @@ function App() {
     return <p>{error}</p>;
   }
 
+  
   const handleClick = (card) => {
     if (clickedCards.includes(card)) {
       maxScore = Math.max(maxScore, currScore)
       setCurrScore(0)
       setClickedCards([])
     } else {
-      setClickedCards([...clickedCards, card])
+      setClickedCards((clickedCards) => [...clickedCards, card])
       setCurrScore(currScore + 1)
     }
     randomizeCards()
   }
 
-  const randomizeCards = () => {
-    let currentIndex = cards.length
-    while (currentIndex != 0) {
-      let randomIndex = Math.floor(Math.random() * currentIndex)
-      currentIndex--
-
-      [cards[currentIndex], cards[randomIndex]] = [cards[randomIndex], cards[currentIndex]]
-    }
-  }
-
+  
   return (
     <div>
       <Header 
