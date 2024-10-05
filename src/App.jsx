@@ -25,22 +25,17 @@ function App() {
       let randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
   
-      console.log('currentIndex:', currentIndex, 'randomIndex:', randomIndex);
+      // console.log('currentIndex:', currentIndex, 'randomIndex:', randomIndex);
   
-      // if (shuffledCards[currentIndex] && shuffledCards[randomIndex]) {
-        [shuffledCards[currentIndex], shuffledCards[randomIndex]] = 
-          [shuffledCards[randomIndex], shuffledCards[currentIndex]];
-      // } else {
-      //   console.error('Undefined value encountered in shuffle', currentIndex, randomIndex);
-      // }
+      [shuffledCards[currentIndex], shuffledCards[randomIndex]] = 
+        [shuffledCards[randomIndex], shuffledCards[currentIndex]];
+      
     }
   
     setCards(shuffledCards);
-    console.log('Shuffled Cards:', shuffledCards);
+    // console.log('Shuffled Cards:', shuffledCards);
   };
   
-
-
   useEffect(() => {
     const fetchCards = async () => {
       try {
