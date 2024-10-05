@@ -13,13 +13,15 @@ function App() {
   const [clickedCards, setClickedCards] = useState([])
 
   const randomizeCards = () => {
-    let currentIndex = cards.length
+    let shuffledCards = [...cards]
+    let currentIndex = shuffledCards.length
     while (currentIndex != 0) {
       let randomIndex = Math.floor(Math.random() * currentIndex)
       currentIndex--
 
-      [cards[currentIndex], cards[randomIndex]] = [cards[randomIndex], cards[currentIndex]]
+      [shuffledCards[currentIndex], shuffledCards[randomIndex]] = [shuffledCards[randomIndex], shuffledCards[currentIndex]]
     }
+    setCards(shuffledCards)
   }
 
 
