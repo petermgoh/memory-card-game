@@ -18,10 +18,10 @@ function App() {
     while (currentIndex != 0) {
       let randomIndex = Math.floor(Math.random() * currentIndex)
       currentIndex--
-
       [shuffledCards[currentIndex], shuffledCards[randomIndex]] = [shuffledCards[randomIndex], shuffledCards[currentIndex]]
     }
     setCards(shuffledCards)
+    console.log(shuffledCards)
   }
 
 
@@ -55,7 +55,6 @@ function App() {
       }
     }
     fetchCards()
-    randomizeCards()
   }, [])
 
   if (loading) {
