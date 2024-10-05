@@ -27,12 +27,12 @@ function App() {
   
       console.log('currentIndex:', currentIndex, 'randomIndex:', randomIndex);
   
-      if (shuffledCards[currentIndex] && shuffledCards[randomIndex]) {
+      // if (shuffledCards[currentIndex] && shuffledCards[randomIndex]) {
         [shuffledCards[currentIndex], shuffledCards[randomIndex]] = 
           [shuffledCards[randomIndex], shuffledCards[currentIndex]];
-      } else {
-        console.error('Undefined value encountered in shuffle', currentIndex, randomIndex);
-      }
+      // } else {
+      //   console.error('Undefined value encountered in shuffle', currentIndex, randomIndex);
+      // }
     }
   
     setCards(shuffledCards);
