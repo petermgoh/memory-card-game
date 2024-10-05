@@ -9,11 +9,15 @@ function App() {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currScore, setCurrScore] = useState(0)
+  const [currScore, setCurrScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([])
 
   const randomizeCards = () => {
     let shuffledCards = [...cards]
+    if (shuffledCards.length === 0) {
+      console.error('Cards array is empty, cannot shuffle');
+      return;
+    }
     let currentIndex = shuffledCards.length
     while (currentIndex != 0) {
       let randomIndex = Math.floor(Math.random() * currentIndex)
