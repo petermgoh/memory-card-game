@@ -13,20 +13,32 @@ function App() {
   const [clickedCards, setClickedCards] = useState([])
 
   const randomizeCards = () => {
-    let shuffledCards = [...cards]
-    if (shuffledCards.length === 0) {
-      console.error('Cards array is empty, cannot shuffle');
+    let shuffledCards = [...cards];
+    let currentIndex = shuffledCards.length;
+    
+    if (currentIndex === 0) {
+      console.error('Cannot shuffle an empty cards array');
       return;
     }
-    let currentIndex = shuffledCards.length
-    while (currentIndex != 0) {
-      let randomIndex = Math.floor(Math.random() * currentIndex)
-      currentIndex--
-      [shuffledCards[currentIndex], shuffledCards[randomIndex]] = [shuffledCards[randomIndex], shuffledCards[currentIndex]]
+  
+    while (currentIndex !== 0) {
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      console.log('currentIndex:', currentIndex, 'randomIndex:', randomIndex);
+  
+      if (shuffledCards[currentIndex] && shuffledCards[randomIndex]) {
+        [shuffledCards[currentIndex], shuffledCards[randomIndex]] = 
+          [shuffledCards[randomIndex], shuffledCards[currentIndex]];
+      } else {
+        console.error('Undefined value encountered in shuffle', currentIndex, randomIndex);
+      }
     }
-    setCards(shuffledCards)
-    console.log(shuffledCards)
-  }
+  
+    setCards(shuffledCards);
+    console.log('Shuffled Cards:', shuffledCards);
+  };
+  
 
 
   useEffect(() => {
